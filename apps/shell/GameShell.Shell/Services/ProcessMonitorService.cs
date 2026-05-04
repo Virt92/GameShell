@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Timers;
 
 namespace GameShell.Shell.Services;
 
@@ -9,7 +8,7 @@ namespace GameShell.Shell.Services;
 /// </summary>
 public class ProcessMonitorService
 {
-    private Timer? _timer;
+    private System.Timers.Timer? _timer;
     private bool _isActive;
 
     private static readonly HashSet<string> BlockedProcesses = new(StringComparer.OrdinalIgnoreCase)
@@ -26,7 +25,7 @@ public class ProcessMonitorService
     public void Start()
     {
         if (_isActive) return;
-        _timer = new Timer(2000);
+        _timer = new System.Timers.Timer(2000);
         _timer.Elapsed += CheckProcesses;
         _timer.Start();
         _isActive = true;
@@ -40,7 +39,7 @@ public class ProcessMonitorService
         _isActive = false;
     }
 
-    private void CheckProcesses(object? sender, ElapsedEventArgs e)
+    private void CheckProcesses(object? sender, System.Timers.ElapsedEventArgs e)
     {
         foreach (var process in Process.GetProcesses())
         {

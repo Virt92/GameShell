@@ -1,10 +1,8 @@
-using System.Timers;
-
 namespace GameShell.Shell.Services;
 
 public class SessionTimerService
 {
-    private Timer? _timer;
+    private System.Timers.Timer? _timer;
     private DateTime _sessionEnd;
     private bool _warned10Min;
     private bool _warned2Min;
@@ -21,7 +19,7 @@ public class SessionTimerService
         _warned10Min = false;
         _warned2Min = false;
 
-        _timer = new Timer(1000);
+        _timer = new System.Timers.Timer(1000);
         _timer.Elapsed += TimerTick;
         _timer.Start();
     }
@@ -40,7 +38,7 @@ public class SessionTimerService
         _timer = null;
     }
 
-    private void TimerTick(object? sender, ElapsedEventArgs e)
+    private void TimerTick(object? sender, System.Timers.ElapsedEventArgs e)
     {
         var remaining = _sessionEnd - DateTime.UtcNow;
 
