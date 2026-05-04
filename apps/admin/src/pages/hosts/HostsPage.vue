@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { Monitor, Wifi, WifiOff, Power, RotateCw, Lock, Unlock } from 'lucide-vue-next'
+import { Monitor, Power, RotateCw, Lock } from 'lucide-vue-next'
 import api from '../../api/client'
 import type { Host } from '../../types'
 

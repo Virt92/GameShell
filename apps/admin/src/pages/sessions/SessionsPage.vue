@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Plus, Pause, Play, Square, Clock } from 'lucide-vue-next'
 import api from '../../api/client'
 import type { Session } from '../../types'

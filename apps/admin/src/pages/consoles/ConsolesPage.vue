@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { Power, Tv, Wifi, AlertTriangle } from 'lucide-vue-next'
+import { Power, Wifi, AlertTriangle } from 'lucide-vue-next'
 import api from '../../api/client'
 import type { Host } from '../../types'
 
