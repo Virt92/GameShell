@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+out/
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test
+coverage/
+
+# Prisma
+apps/backend/prisma/*.db
+
+# C# / .NET
+*.user
+*.suo
+*.cache
+packages/
+!packages/shared/
+*.nupkg
+project.lock.json
+
+# Docker
+docker-compose.override.yml
