@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend (NestJS)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/backend
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+        working-directory: apps/backend
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+        working-directory: apps/backend
+
+      - name: Build
+        run: npm run build
+        working-directory: apps/backend
+
+  admin:
+    name: Admin Panel (Vue 3)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/admin/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/admin
+
+      - name: Type check
+        run: npx vue-tsc --noEmit
+        working-directory: apps/admin
+
+      - name: Build
+        run: npm run build
+        working-directory: apps/admin
+
+  shell:
+    name: Shell (C# WPF)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore
+        working-directory: apps/shell/GameShell.Shell
+
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: apps/shell/GameShell.Shell
+
+  agent:
+    name: Agent (C# Worker)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore
+        working-directory: apps/agent/GameShell.Agent
+
+      - name: Build
+        run: dotnet build --no-restore
+        working-directory: apps/agent/GameShell.Agent
